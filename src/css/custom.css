@@ -1,0 +1,240 @@
+/* ═══════════════════════════════════════════════════════════════
+   Delaware Brand Design System — Docusaurus Theme Override
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─── Primary: Red Palette ─────────────────────────────────── */
+  --ifm-color-primary: #c42828;
+  --ifm-color-primary-dark: #af2424;
+  --ifm-color-primary-darker: #a42020;
+  --ifm-color-primary-darkest: #941914;
+  --ifm-color-primary-light: #d43030;
+  --ifm-color-primary-lighter: #ef463c;
+  --ifm-color-primary-lightest: #ee7684;
+
+  /* ─── Delaware Brand Tokens ────────────────────────────────── */
+  --dw-red:        #c42828;
+  --dw-dot-red:    #ef463c;
+  --dw-sub-red-1:  #ee7684;
+  --dw-sub-red-2:  #941914;
+  --dw-teal:       #72c4bf;
+  --dw-purple:     #ad9bcb;
+  --dw-text:       #3c3c3c;
+  --dw-mid-gray:   #999999;
+  --dw-light-gray: #f5f5f5;
+
+  /* ─── Typography ────────────────────────────────────────────── */
+  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ifm-font-size-base: 16px;
+  --ifm-line-height-base: 1.65;
+  --ifm-code-font-size: 93%;
+
+  /* ─── Layout ────────────────────────────────────────────────── */
+  --docusaurus-highlighted-code-line-bg: rgba(196, 40, 40, 0.08);
+  --ifm-toc-border-color: var(--dw-teal);
+  --ifm-navbar-height: 58px;
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #ef463c;
+  --ifm-color-primary-dark: #e8352a;
+  --ifm-color-primary-darker: #e42d21;
+  --ifm-color-primary-darkest: #c42828;
+  --ifm-color-primary-light: #f26b64;
+  --ifm-color-primary-lighter: #f4837d;
+  --ifm-color-primary-lightest: #f9b3af;
+  --docusaurus-highlighted-code-line-bg: rgba(239, 70, 60, 0.15);
+  --dw-light-gray: #1e1e1e;
+  --dw-text: #e0e0e0;
+}
+
+/* ─── Navbar ─────────────────────────────────────────────────── */
+.navbar {
+  background: #1a1a1a !important;
+  border-bottom: 3px solid var(--dw-dot-red);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+}
+
+.navbar__brand {
+  font-weight: 800;
+}
+
+.navbar__title {
+  color: #ffffff !important;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.navbar__logo {
+  filter: brightness(0) invert(1);
+}
+
+.navbar__link {
+  color: rgba(255, 255, 255, 0.82) !important;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.navbar__link:hover,
+.navbar__link--active {
+  color: var(--dw-dot-red) !important;
+}
+
+/* ─── Docs Page Typography ───────────────────────────────────── */
+.markdown h1 {
+  color: var(--dw-red);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.markdown h2 {
+  color: var(--dw-sub-red-2);
+  font-weight: 700;
+  border-left: 5px solid var(--dw-dot-red);
+  padding-left: 16px;
+  margin-top: 2.5rem;
+}
+
+.markdown h3 {
+  color: var(--dw-teal);
+  font-weight: 600;
+}
+
+.markdown h4 {
+  color: var(--dw-purple);
+  font-weight: 600;
+}
+
+.markdown strong {
+  color: var(--dw-red);
+}
+
+[data-theme='dark'] .markdown h2 {
+  color: var(--dw-sub-red-1);
+}
+
+[data-theme='dark'] .markdown h3 {
+  color: var(--dw-teal);
+}
+
+[data-theme='dark'] .markdown strong {
+  color: var(--dw-dot-red);
+}
+
+/* ─── Tables ─────────────────────────────────────────────────── */
+.markdown table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.markdown table thead tr {
+  background: var(--dw-red);
+}
+
+.markdown table thead th {
+  color: #ffffff;
+  font-weight: 600;
+  padding: 10px 16px;
+  border: none;
+  text-align: left;
+}
+
+.markdown table tbody tr:nth-child(even) {
+  background: rgba(114, 196, 191, 0.06);
+}
+
+.markdown table tbody td {
+  padding: 10px 16px;
+  border: 1px solid rgba(153, 153, 153, 0.2);
+  vertical-align: top;
+}
+
+[data-theme='dark'] .markdown table thead tr {
+  background: var(--dw-sub-red-2);
+}
+
+[data-theme='dark'] .markdown table tbody tr:nth-child(even) {
+  background: rgba(114, 196, 191, 0.04);
+}
+
+/* ─── Code Blocks ────────────────────────────────────────────── */
+div[class*='codeBlockContainer'] {
+  border-left: 4px solid var(--dw-teal);
+  border-radius: 0 8px 8px 0;
+}
+
+code {
+  border: 1px solid rgba(196, 40, 40, 0.18);
+  background: rgba(196, 40, 40, 0.05);
+  border-radius: 4px;
+}
+
+[data-theme='dark'] code {
+  background: rgba(239, 70, 60, 0.1);
+  border-color: rgba(239, 70, 60, 0.2);
+}
+
+/* ─── Sidebar ────────────────────────────────────────────────── */
+.menu__link--active:not(.menu__link--sublist) {
+  border-left: 3px solid var(--dw-dot-red);
+  padding-left: 9px;
+  background: rgba(196, 40, 40, 0.07);
+}
+
+.menu__link:hover {
+  color: var(--dw-red);
+}
+
+/* ─── TOC (right rail) ───────────────────────────────────────── */
+.table-of-contents__link--active {
+  color: var(--dw-red) !important;
+  font-weight: 600;
+}
+
+.table-of-contents__link:hover {
+  color: var(--dw-red) !important;
+}
+
+/* ─── Pagination ─────────────────────────────────────────────── */
+.pagination-nav__link {
+  border: 2px solid rgba(114, 196, 191, 0.4);
+  border-radius: 8px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--dw-red);
+  box-shadow: 0 4px 12px rgba(196, 40, 40, 0.12);
+}
+
+.pagination-nav__label::before,
+.pagination-nav__label::after {
+  color: var(--dw-dot-red);
+}
+
+/* ─── Footer ─────────────────────────────────────────────────── */
+.footer {
+  border-top: 3px solid var(--dw-red);
+}
+
+.footer__title {
+  color: var(--dw-teal) !important;
+  font-weight: 700;
+}
+
+/* ─── Admonitions ────────────────────────────────────────────── */
+.admonition {
+  border-left-width: 5px;
+}
+
+.alert--info {
+  border-left-color: var(--dw-teal) !important;
+}
+
+.alert--warning {
+  border-left-color: var(--dw-dot-red) !important;
+}
