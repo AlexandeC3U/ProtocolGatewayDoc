@@ -12,7 +12,7 @@ const config = {
   },
 
   url: 'https://AlexandeC3U.github.io',
-  baseUrl: '/ConduitEdge/',
+  baseUrl: '/',
 
   organizationName: 'AlexandeC3U',
   projectName: 'ConduitEdge',
