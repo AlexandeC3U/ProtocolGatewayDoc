@@ -28,7 +28,7 @@ The Web UI targets **industrial control room environments** — typically dimly-
 │                                                                                 │
 │  ┌─────────────────────────────────────────────────────────────────────────┐    │
 │  │  CSS Variables (globals.css)                                            │    │
-│  │  :root { --background, --foreground, --primary, --accent, ... }        │    │
+│  │  :root { --background, --foreground, --primary, --accent, ... }         │    │
 │  │  .dark { /* overrides for dark theme */ }                               │    │
 │  └─────────────────────────────────────────────────────────────────────────┘    │
 │       │                                                                         │
@@ -82,8 +82,8 @@ The Web UI targets **industrial control room environments** — typically dimly-
 ┌────────────────────────────────────────────────────────────────────────────┐
 │  DELAWARE BRAND PALETTE                                                    │
 │                                                                            │
-│  Primary Red    ██████  #c42828  — Accent, destructive actions             │
-│  Primary Teal   ██████  #72c4bf  — Secondary accent, links                 │
+│  Primary Red    ██████  #c42828  — Accent, destructive actions           │
+│  Primary Teal   ██████  #72c4bf  — Secondary accent, links               │
 │                                                                            │
 │  Used in:                                                                  │
 │  • Login page branding ("d." logo)                                         │
@@ -101,14 +101,14 @@ Each protocol has a distinct color for instant visual identification:
 ┌────────────────────────────────────────────────────────────────────────────┐
 │  PROTOCOL COLOR MAP                                                        │
 │                                                                            │
-│  Protocol       Sidebar   Badge BG      Badge Text    Tailwind Class      │
-│  ─────────────  ────────  ────────────  ────────────  ──────────────      │
-│  modbus         Blue      blue-500/20   blue-400      protocol-modbus     │
-│  opcua          Amber     amber-500/20  amber-400     protocol-opcua      │
-│  s7             Green     green-500/20  green-400     protocol-s7         │
-│  mqtt           Purple    purple-500/20 purple-400    protocol-mqtt       │
-│  bacnet         Teal      teal-500/20   teal-400      protocol-bacnet     │
-│  ethernetip     Cyan      cyan-500/20   cyan-400      protocol-ethernetip │
+│  Protocol       Sidebar   Badge BG      Badge Text    Tailwind Class       │
+│  ─────────────  ────────  ────────────  ────────────  ──────────────       │
+│  modbus         Blue      blue-500/20   blue-400      protocol-modbus      │
+│  opcua          Amber     amber-500/20  amber-400     protocol-opcua       │
+│  s7             Green     green-500/20  green-400     protocol-s7          │
+│  mqtt           Purple    purple-500/20 purple-400    protocol-mqtt        │
+│  bacnet         Teal      teal-500/20   teal-400      protocol-bacnet      │
+│  ethernetip     Cyan      cyan-500/20   cyan-400      protocol-ethernetip  │
 │                                                                            │
 │  Usage:                                                                    │
 │  • Device card left border (4px solid)                                     │
@@ -125,17 +125,17 @@ Each protocol has a distinct color for instant visual identification:
 │  STATUS INDICATORS                                                         │
 │                                                                            │
 │  Status     Color      Dot       Usage                                     │
-│  ─────────  ─────────  ────────  ─────────────────────────────────────    │
-│  online     Emerald    ● (solid) Device connected, service healthy        │
-│  offline    Slate      ○ (ring)  Device disconnected, service down        │
-│  error      Red        ● (pulse) Connection error, service error          │
-│  unknown    Yellow     ◐ (half)  Status undetermined                      │
-│  degraded   Amber      ◐ (half)  Service partially available              │
+│  ─────────  ─────────  ────────  ─────────────────────────────────────     │
+│  online     Emerald    ● (solid) Device connected, service healthy         │
+│  offline    Slate      ○ (ring)  Device disconnected, service down         │
+│  error      Red        ● (pulse) Connection error, service error           │
+│  unknown    Yellow     ◐ (half)  Status undetermined                       │
+│  degraded   Amber      ◐ (half)  Service partially available               │
 │                                                                            │
-│  Status dots use Tailwind classes:                                          │
-│  • bg-emerald-500 + animate-pulse (online, pulsing glow)                  │
+│  Status dots use Tailwind classes:                                         │
+│  • bg-emerald-500 + animate-pulse (online, pulsing glow)                   │
 │  • bg-slate-500 (offline, static)                                          │
-│  • bg-red-500 + animate-pulse (error, attention-drawing)                  │
+│  • bg-red-500 + animate-pulse (error, attention-drawing)                   │
 │  • bg-yellow-500 (unknown/degraded)                                        │
 │                                                                            │
 └────────────────────────────────────────────────────────────────────────────┘
@@ -205,19 +205,19 @@ module.exports = {
 │  BUTTON VARIANTS                                                           │
 │                                                                            │
 │  Variant        Appearance              Use Case                           │
-│  ─────────────  ──────────────────────  ──────────────────────────────    │
-│  default        White bg, dark text     Primary actions (Save, Create)    │
-│  destructive    Red bg, white text      Dangerous actions (Delete)        │
-│  outline        Border, transparent bg  Secondary actions (Cancel, Back)  │
-│  ghost          No border, transparent  Tertiary actions (sidebar links)  │
-│  link           Text only, underline    Inline text links                 │
+│  ─────────────  ──────────────────────  ──────────────────────────────     │
+│  default        White bg, dark text     Primary actions (Save, Create)     │
+│  destructive    Red bg, white text      Dangerous actions (Delete)         │
+│  outline        Border, transparent bg  Secondary actions (Cancel, Back)   │
+│  ghost          No border, transparent  Tertiary actions (sidebar links)   │
+│  link           Text only, underline    Inline text links                  │
 │                                                                            │
 │  Size           Dimensions              Use Case                           │
-│  ─────────────  ──────────────────────  ──────────────────────────────    │
-│  default        h-10, px-4              Standard buttons                  │
-│  sm             h-9, px-3               Compact areas (table rows)        │
-│  lg             h-11, px-8              Hero actions                      │
-│  icon           h-10, w-10             Icon-only buttons (close, menu)    │
+│  ─────────────  ──────────────────────  ──────────────────────────────     │
+│  default        h-10, px-4              Standard buttons                   │
+│  sm             h-9, px-3               Compact areas (table rows)         │
+│  lg             h-11, px-8              Hero actions                       │
+│  icon           h-10, w-10             Icon-only buttons (close, menu)     │
 │                                                                            │
 └────────────────────────────────────────────────────────────────────────────┘
 ```

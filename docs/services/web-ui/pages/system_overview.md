@@ -14,18 +14,18 @@
 │  ┌───────────────────────────────────────────────────────────────────────────┐  │
 │  │                       REACT SPA (Vite bundle)                             │  │
 │  │                                                                           │  │
-│  │  ┌─────────┐  ┌──────────┐  ┌───────────┐  ┌──────────┐  ┌───────────┐  │  │
-│  │  │  Auth   │  │  Router  │  │  Query    │  │  Pages   │  │   UI      │  │  │
-│  │  │ Context │  │  (RR6)   │  │  Client   │  │          │  │ (Radix)   │  │  │
-│  │  │         │  │          │  │  (TQ v5)  │  │ Dashboard│  │           │  │  │
-│  │  │ OIDC    │  │ /        │  │           │  │ Devices  │  │ Button    │  │  │
-│  │  │ PKCE    │  │ /devices │  │ 5s stale  │  │ Tags     │  │ Card      │  │  │
-│  │  │ Tokens  │  │ /tags    │  │ 1 retry   │  │ System   │  │ Dialog    │  │  │
-│  │  │ Roles   │  │ /system  │  │ Auto GC   │  │ Health   │  │ Table     │  │  │
-│  │  │         │  │ /health  │  │           │  │ Login    │  │ Toast     │  │  │
-│  │  └────┬────┘  └────┬─────┘  └─────┬─────┘  └────┬─────┘  └───────────┘  │  │
+│  │  ┌─────────┐  ┌──────────┐  ┌───────────┐  ┌──────────┐  ┌───────────┐    │  │
+│  │  │  Auth   │  │  Router  │  │  Query    │  │  Pages   │  │   UI      │    │  │
+│  │  │ Context │  │  (RR6)   │  │  Client   │  │          │  │ (Radix)   │    │  │
+│  │  │         │  │          │  │  (TQ v5)  │  │ Dashboard│  │           │    │  │
+│  │  │ OIDC    │  │ /        │  │           │  │ Devices  │  │ Button    │    │  │
+│  │  │ PKCE    │  │ /devices │  │ 5s stale  │  │ Tags     │  │ Card      │    │  │
+│  │  │ Tokens  │  │ /tags    │  │ 1 retry   │  │ System   │  │ Dialog    │    │  │
+│  │  │ Roles   │  │ /system  │  │ Auto GC   │  │ Health   │  │ Table     │    │  │
+│  │  │         │  │ /health  │  │           │  │ Login    │  │ Toast     │    │  │
+│  │  └────┬────┘  └────┬─────┘  └─────┬─────┘  └────┬─────┘  └───────────┘    │  │
 │  │       │            │              │             │                         │  │
-│  │       └────────────┴──────────────┴─────────────┘                        │  │
+│  │       └────────────┴──────────────┴─────────────┘                         │  │
 │  │                                   │                                       │  │
 │  │                            ┌──────▼──────┐                                │  │
 │  │                            │  API Client │                                │  │
@@ -39,7 +39,7 @@
 │                                      │                                          │
 └──────────────────────────────────────┼──────────────────────────────────────────┘
                                        │
-                    ┌──────────────────┬┴──────────────────┐
+                    ┌──────────────────┴────────────────────┐
                     │                  │                    │
               HTTP/REST          OIDC/OAuth2          HTTP (iframe)
                     │                  │                    │
@@ -47,16 +47,16 @@
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              NGINX (Port 80)                                    │
 │                                                                                 │
-│  ┌──────────┐  ┌──────────────┐  ┌──────────────┐  ┌────────────────────────┐  │
-│  │  /       │  │  /api/*      │  │  /health/*   │  │  /grafana/*           │  │
-│  │          │  │              │  │              │  │                        │  │
-│  │  Static  │  │  Proxy to    │  │  Proxy to    │  │  Proxy to              │  │
-│  │  files   │  │  gateway-    │  │  gateway-    │  │  grafana:3000          │  │
-│  │  + SPA   │  │  core:3001   │  │  core:3001   │  │                        │  │
-│  │  fallback│  │              │  │              │  │                        │  │
-│  └──────────┘  └──────┬───────┘  └──────┬───────┘  └────────────┬───────────┘  │
-│                       │                 │                        │               │
-└───────────────────────┼─────────────────┼────────────────────────┼───────────────┘
+│  ┌──────────┐  ┌──────────────┐  ┌──────────────┐  ┌────────────────────────┐   │
+│  │  /       │  │  /api/*      │  │  /health/*   │  │  /grafana/*            │   │
+│  │          │  │              │  │              │  │                        │   │
+│  │  Static  │  │  Proxy to    │  │  Proxy to    │  │  Proxy to              │   │
+│  │  files   │  │  gateway-    │  │  gateway-    │  │  grafana:3000          │   │
+│  │  + SPA   │  │  core:3001   │  │  core:3001   │  │                        │   │
+│  │  fallback│  │              │  │              │  │                        │   │
+│  └──────────┘  └──────┬───────┘  └──────┬───────┘  └─────────────┬──────────┘   │
+│                       │                 │                        │              │
+└───────────────────────┼─────────────────┼────────────────────────┼──────────────┘
                         │                 │                        │
                         ▼                 ▼                        ▼
                ┌─────────────────┐                       ┌─────────────────┐
@@ -91,10 +91,10 @@ The Web UI has three external runtime dependencies:
                     ┌────────────┼────────────┐
                     │            │            │
                     ▼            ▼            ▼
-           ┌──────────────┐ ┌────────┐ ┌──────────┐
-           │ Gateway Core │ │Authentik│ │ Grafana  │
+           ┌──────────────┐ ┌──────────┐ ┌──────────┐
+           │ Gateway Core │ │Authentik │ │ Grafana  │
            │  (required)  │ │(optional)│ │(optional)│
-           └──────────────┘ └────────┘ └──────────┘
+           └──────────────┘ └──────────┘ └──────────┘
 ```
 
 | Dependency | Required | Purpose | Failure Mode |
@@ -128,15 +128,15 @@ Browser                  Nginx              Gateway Core           PostgreSQL
   │  GET /api/devices      │                      │                      │
   │  Authorization: Bearer │                      │                      │
   │  ──────────────────>   │                      │                      │
-  │                        │  proxy_pass           │                      │
-  │                        │  ─────────────────>   │                      │
+  │                        │  proxy_pass          │                      │
+  │                        │  ─────────────────>  │                      │
   │                        │                      │  SELECT * FROM       │
   │                        │                      │  devices             │
   │                        │                      │  ──────────────────> │
   │                        │                      │                      │
   │                        │                      │  <── rows ────────── │
   │                        │                      │                      │
-  │                        │  <── 200 JSON ─────── │                      │
+  │                        │  <── 200 JSON ────── │                      │
   │                        │                      │                      │
   │  <── 200 JSON ──────── │                      │                      │
   │                        │                      │                      │
@@ -195,9 +195,9 @@ Browser                  Authentik              Gateway Core
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                           DEVELOPMENT MODE                                      │
 │                                                                                 │
-│  Browser ──> Vite Dev Server (5173) ──┬──> Static (HMR, hot reload)            │
-│                                       ├──> /api/*  ──> Gateway Core (3001)     │
-│                                       └──> /health ──> Gateway Core (3001)     │
+│  Browser ──> Vite Dev Server (5173) ──┬──> Static (HMR, hot reload)             │
+│                                       ├──> /api/*  ──> Gateway Core (3001)      │
+│                                       └──> /health ──> Gateway Core (3001)      │
 │                                                                                 │
 │  • Instant feedback via SWC + React Fast Refresh                                │
 │  • Source maps enabled                                                          │
@@ -206,14 +206,14 @@ Browser                  Authentik              Gateway Core
 ├─────────────────────────────────────────────────────────────────────────────────┤
 │                           PRODUCTION MODE                                       │
 │                                                                                 │
-│  Browser ──> Nginx (80) ──┬──> /           ──> Static files + SPA fallback     │
-│                           ├──> /api/*      ──> Gateway Core (3001)             │
-│                           ├──> /health/*   ──> Gateway Core (3001)             │
-│                           └──> /grafana/*  ──> Grafana (3000)                  │
+│  Browser ──> Nginx (80) ──┬──> /           ──> Static files + SPA fallback      │
+│                           ├──> /api/*      ──> Gateway Core (3001)              │
+│                           ├──> /health/*   ──> Gateway Core (3001)              │
+│                           └──> /grafana/*  ──> Grafana (3000)                   │
 │                                                                                 │
 │  • Gzip compression on all responses                                            │
 │  • 1-year cache on static assets (hashed filenames)                             │
-│  • Security headers (X-Frame-Options, X-Content-Type-Options, X-XSS-Protection)│
+│  • Security headers (X-Frame-Options, X-Content-Type-Options, X-XSS-Protection) │
 │  • Auth required via Authentik OIDC                                             │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
@@ -228,27 +228,27 @@ Browser                  Authentik              Gateway Core
 │                                                                                 │
 │  PRESENTATION LAYER                                                             │
 │  ┌────────────────────────────────────────────────────────────────────────────┐ │
-│  │  React 18 │ TailwindCSS │ Radix UI │ Lucide Icons │ React Flow │ Recharts│ │
+│  │  React 18 │ TailwindCSS │ Radix UI │ Lucide Icons │ React Flow │ Recharts  │ │
 │  └────────────────────────────────────────────────────────────────────────────┘ │
 │                                                                                 │
 │  STATE & DATA LAYER                                                             │
 │  ┌────────────────────────────────────────────────────────────────────────────┐ │
-│  │  TanStack Query (server state) │ React Context (auth) │ Component state  │ │
+│  │  TanStack Query (server state) │ React Context (auth) │ Component state    │ │
 │  └────────────────────────────────────────────────────────────────────────────┘ │
 │                                                                                 │
 │  NETWORK LAYER                                                                  │
 │  ┌────────────────────────────────────────────────────────────────────────────┐ │
-│  │  fetch() API client │ OIDC (native crypto) │ mqtt.js (WebSocket)         │ │
+│  │  fetch() API client │ OIDC (native crypto) │ mqtt.js (WebSocket)           │ │
 │  └────────────────────────────────────────────────────────────────────────────┘ │
 │                                                                                 │
 │  ROUTING LAYER                                                                  │
 │  ┌────────────────────────────────────────────────────────────────────────────┐ │
-│  │  React Router v6 │ ProtectedRoute │ AuthCallback │ Layout (Outlet)       │ │
+│  │  React Router v6 │ ProtectedRoute │ AuthCallback │ Layout (Outlet)         │ │
 │  └────────────────────────────────────────────────────────────────────────────┘ │
 │                                                                                 │
 │  BUILD & TOOLING                                                                │
 │  ┌────────────────────────────────────────────────────────────────────────────┐ │
-│  │  Vite 5 + SWC │ TypeScript 5.4 │ ESLint │ PostCSS │ Autoprefixer        │ │
+│  │  Vite 5 + SWC │ TypeScript 5.4 │ ESLint │ PostCSS │ Autoprefixer           │ │
 │  └────────────────────────────────────────────────────────────────────────────┘ │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘

@@ -12,16 +12,16 @@
 │                       STATE MANAGEMENT LAYERS                                   │
 │                                                                                 │
 │  ┌─────────────────────────────────────────────────────────────────────────┐    │
-│  │                    SERVER STATE (TanStack Query v5)                      │    │
+│  │                    SERVER STATE (TanStack Query v5)                     │    │
 │  │                                                                         │    │
 │  │  What: Devices, tags, health status, system info                        │    │
-│  │  How:  useQuery() fetches, caches (5s stale), auto-refetches           │    │
-│  │  Why:  Server is source of truth; cache is a performance optimization  │    │
+│  │  How:  useQuery() fetches, caches (5s stale), auto-refetches            │    │
+│  │  Why:  Server is source of truth; cache is a performance optimization   │    │
 │  │                                                                         │    │
 │  └─────────────────────────────────────────────────────────────────────────┘    │
 │                                                                                 │
 │  ┌─────────────────────────────────────────────────────────────────────────┐    │
-│  │                    AUTH STATE (React Context)                            │    │
+│  │                    AUTH STATE (React Context)                           │    │
 │  │                                                                         │    │
 │  │  What: User profile, tokens, auth status, login/logout functions        │    │
 │  │  How:  AuthProvider + useAuth() hook                                    │    │
@@ -30,7 +30,7 @@
 │  └─────────────────────────────────────────────────────────────────────────┘    │
 │                                                                                 │
 │  ┌─────────────────────────────────────────────────────────────────────────┐    │
-│  │                    UI STATE (Component useState)                         │    │
+│  │                    UI STATE (Component useState)                        │    │
 │  │                                                                         │    │
 │  │  What: Dialog open/close, form values, filter strings, sort state       │    │
 │  │  How:  Local useState() in each component                               │    │
@@ -39,7 +39,7 @@
 │  └─────────────────────────────────────────────────────────────────────────┘    │
 │                                                                                 │
 │  ┌─────────────────────────────────────────────────────────────────────────┐    │
-│  │                    URL STATE (React Router)                              │    │
+│  │                    URL STATE (React Router)                             │    │
 │  │                                                                         │    │
 │  │  What: Current page, device ID, tab selection                           │    │
 │  │  How:  useParams(), useNavigate(), useSearchParams()                    │    │
@@ -86,12 +86,12 @@ Query keys are structured for targeted invalidation:
 │                       QUERY KEY HIERARCHY                                       │
 │                                                                                 │
 │  ['devices']                          ← All device queries                      │
-│  ['devices', { search, protocol, status }]  ← Filtered device list             │
+│  ['devices', { search, protocol, status }]  ← Filtered device list              │
 │  ['device', id]                       ← Single device by ID                     │
 │                                                                                 │
-│  ['tags']                             ← All tag queries                          │
-│  ['tags', { search, deviceId, dataType, accessMode, limit, offset }]           │
-│  ['tag', id]                          ← Single tag by ID                         │
+│  ['tags']                             ← All tag queries                         │
+│  ['tags', { search, deviceId, dataType, accessMode, limit, offset }]            │
+│  ['tag', id]                          ← Single tag by ID                        │
 │                                                                                 │
 │  ['dashboard', 'devices']             ← Dashboard device stats                  │
 │  ['dashboard', 'tags']                ← Dashboard tag stats                     │
@@ -192,7 +192,7 @@ const { data } = useQuery({
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│                     MUTATION LIFECYCLE                                           │
+│                     MUTATION LIFECYCLE                                          │
 │                                                                                 │
 │  User action (click "Save")                                                     │
 │       │                                                                         │
@@ -301,24 +301,24 @@ const bulkCreateMutation = useMutation({
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│                    INVALIDATION RULES                                            │
+│                    INVALIDATION RULES                                           │
 │                                                                                 │
 │  Mutation                    │ Invalidated Query Keys                           │
 │  ────────────────────────────┼──────────────────────────────────────────────    │
-│  Create device               │ ['devices'], ['dashboard']                      │
-│  Update device               │ ['devices'], ['device', id]                     │
-│  Delete device               │ ['devices'], ['dashboard']                      │
-│  Toggle device               │ ['devices'], ['device', id]                     │
-│  Test connection             │ ['device', id]                                  │
+│  Create device               │ ['devices'], ['dashboard']                       │
+│  Update device               │ ['devices'], ['device', id]                      │
+│  Delete device               │ ['devices'], ['dashboard']                       │
+│  Toggle device               │ ['devices'], ['device', id]                      │
+│  Test connection             │ ['device', id]                                   │
 │  ────────────────────────────┼──────────────────────────────────────────────    │
-│  Create tag                  │ ['tags'], ['device', deviceId]                  │
-│  Update tag                  │ ['tags'], ['tag', id]                           │
-│  Delete tag                  │ ['tags'], ['device', deviceId]                  │
-│  Toggle tag                  │ ['tags'], ['tag', id]                           │
-│  Bulk create tags            │ ['tags'], ['device', deviceId]                  │
+│  Create tag                  │ ['tags'], ['device', deviceId]                   │
+│  Update tag                  │ ['tags'], ['tag', id]                            │
+│  Delete tag                  │ ['tags'], ['device', deviceId]                   │
+│  Toggle tag                  │ ['tags'], ['tag', id]                            │
+│  Bulk create tags            │ ['tags'], ['device', deviceId]                   │ 
 │                                                                                 │
 │  Note: Dashboard queries are invalidated by prefix match — invalidating         │
-│  ['devices'] catches ['dashboard', 'devices'] via TQ's fuzzy matching.         │
+│  ['devices'] catches ['dashboard', 'devices'] via TQ's fuzzy matching.          │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```

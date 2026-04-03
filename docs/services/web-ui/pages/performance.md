@@ -18,9 +18,9 @@ of Babel. SWC compiles TypeScript and JSX ~20x faster than Babel.
 │                                                                                 │
 │  Tool           Dev Start    HMR Update    Prod Build                           │
 │  ─────────────  ───────────  ────────────  ────────────                         │
-│  Vite + SWC     < 500ms      < 50ms        ~10-15s                             │
-│  Vite + Babel   < 800ms      < 100ms       ~20-30s                             │
-│  CRA (webpack)  ~5s          ~500ms        ~60-90s                             │
+│  Vite + SWC     < 500ms      < 50ms        ~10-15s                              │
+│  Vite + Babel   < 800ms      < 100ms       ~20-30s                              │
+│  CRA (webpack)  ~5s          ~500ms        ~60-90s                              │
 │                                                                                 │
 │  SWC handles:                                                                   │
 │  • TypeScript → JavaScript                                                      │
@@ -52,21 +52,21 @@ production. A typical Tailwind build goes from ~3MB of CSS to ~20-50KB.
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                    APPROXIMATE BUNDLE BREAKDOWN                                 │
 │                                                                                 │
-│  Chunk                    Size (gzip)     Contents                             │
-│  ───────────────────────  ──────────────  ──────────────────────────────────   │
-│  vendor-react.js          ~45KB           React, ReactDOM, React Router        │
-│  vendor-query.js          ~15KB           TanStack Query + Table               │
-│  vendor-radix.js          ~20KB           Radix UI primitives                  │
-│  vendor-xyflow.js         ~30KB           React Flow (architecture diagram)    │
-│  vendor-recharts.js       ~40KB           Recharts (if used)                   │
-│  vendor-mqtt.js           ~25KB           mqtt.js                              │
-│  app.js                   ~30KB           Application code                     │
-│  styles.css               ~25KB           Tailwind + custom CSS                │
-│  ───────────────────────  ──────────────  ──────────────────────────────────   │
-│  Total                    ~230KB gzip     Initial load                         │
+│  Chunk                    Size (gzip)     Contents                              │
+│  ───────────────────────  ──────────────  ──────────────────────────────────    │
+│  vendor-react.js          ~45KB           React, ReactDOM, React Router         │
+│  vendor-query.js          ~15KB           TanStack Query + Table                │
+│  vendor-radix.js          ~20KB           Radix UI primitives                   │
+│  vendor-xyflow.js         ~30KB           React Flow (architecture diagram)     │
+│  vendor-recharts.js       ~40KB           Recharts (if used)                    │
+│  vendor-mqtt.js           ~25KB           mqtt.js                               │
+│  app.js                   ~30KB           Application code                      │
+│  styles.css               ~25KB           Tailwind + custom CSS                 │
+│  ───────────────────────  ──────────────  ──────────────────────────────────    │
+│  Total                    ~230KB gzip     Initial load                          │
 │                                                                                 │
-│  Note: Sizes are approximate. Actual sizes depend on import usage.             │
-│  Content-hashed filenames ensure cache-busting on deploys.                     │
+│  Note: Sizes are approximate. Actual sizes depend on import usage.              │
+│  Content-hashed filenames ensure cache-busting on deploys.                      │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -89,20 +89,20 @@ pnpm build -- --report
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│                    CACHING STRATEGY                                              │
+│                    CACHING STRATEGY                                             │
 │                                                                                 │
 │  Asset Type            Cache Header                    Duration                 │
-│  ────────────────────  ──────────────────────────────  ─────────               │
-│  /assets/*.js          Cache-Control: public, immutable  1 year                │
-│  /assets/*.css         Cache-Control: public, immutable  1 year                │
-│  /assets/*.woff2       Cache-Control: public, immutable  1 year                │
-│  /index.html           Cache-Control: no-cache            0 (always fresh)     │
-│  /api/*                No caching (proxied)               —                    │
+│  ────────────────────  ──────────────────────────────  ─────────                │
+│  /assets/*.js          Cache-Control: public, immutable  1 year                 │
+│  /assets/*.css         Cache-Control: public, immutable  1 year                 │
+│  /assets/*.woff2       Cache-Control: public, immutable  1 year                 │
+│  /index.html           Cache-Control: no-cache            0 (always fresh)      │
+│  /api/*                No caching (proxied)               —                     │
 │                                                                                 │
 │  Why this works:                                                                │
-│  • Vite adds content hashes to filenames: index-a1b2c3.js                      │
-│  • New deploy = new hash = new URL = cache miss (automatic bust)               │
-│  • index.html is never cached so it always references latest assets            │
+│  • Vite adds content hashes to filenames: index-a1b2c3.js                       │
+│  • New deploy = new hash = new URL = cache miss (automatic bust)                │
+│  • index.html is never cached so it always references latest assets             │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -133,24 +133,24 @@ TanStack Query acts as an **in-memory client-side cache** that reduces API calls
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│                    RENDER PERFORMANCE PATTERNS                                   │
+│                    RENDER PERFORMANCE PATTERNS                                  │
 │                                                                                 │
 │  Pattern                    Implementation                                      │
-│  ─────────────────────────  ────────────────────────────────────────────────   │
+│  ─────────────────────────  ────────────────────────────────────────────────    │
 │  Avoid unnecessary renders  TanStack Query structural sharing —                 │
 │                              only re-renders when data actually changes         │
 │                                                                                 │
-│  Lazy loading               React.lazy() for heavy components                  │
-│                              (React Flow diagram, Recharts)                    │
+│  Lazy loading               React.lazy() for heavy components                   │
+│                              (React Flow diagram, Recharts)                     │
 │                                                                                 │
 │  Virtualization             Not yet needed — device/tag lists                   │
 │                              typically < 500 items                              │
 │                                                                                 │
 │  Debounced search           Search filter input debounced to                    │
-│                              reduce API calls while typing                     │
+│                              reduce API calls while typing                      │
 │                                                                                 │
 │  Pagination                  Server-side pagination (25/page) —                 │
-│                              never load full dataset                           │
+│                              never load full dataset                            │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```

@@ -11,11 +11,11 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│                    TOKEN EXPIRY SCENARIO                                         │
+│                    TOKEN EXPIRY SCENARIO                                        │
 │                                                                                 │
 │  Operator is actively using the UI                                              │
 │       │                                                                         │
-│       ├── Access token expires (typically 5-15 min)                              │
+│       ├── Access token expires (typically 5-15 min)                             │
 │       │                                                                         │
 │       ├── Next API call returns 401                                             │
 │       │                                                                         │
@@ -31,7 +31,7 @@
 │  redirected to login. This can be jarring mid-task.                             │
 │                                                                                 │
 │  MITIGATION: 30-second redirect loop guard prevents infinite                    │
-│  login → callback → 401 → login cycles.                                        │
+│  login → callback → 401 → login cycles.                                         │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -66,7 +66,7 @@ be confusing.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│                    GATEWAY CORE DOWN                                             │
+│                    GATEWAY CORE DOWN                                            │
 │                                                                                 │
 │  Scenario: Gateway Core process crashes or network partition                    │
 │                                                                                 │
@@ -78,13 +78,13 @@ be confusing.
 │  • Device list shows error state with "Retry" button                            │
 │                                                                                 │
 │  Recovery:                                                                      │
-│  • Gateway Core comes back → user clicks "Retry" → data loads                  │
+│  • Gateway Core comes back → user clicks "Retry" → data loads                   │
 │  • Or: TanStack Query auto-refetches on window focus                            │
-│    (disabled by default — user must manually refresh)                            │
+│    (disabled by default — user must manually refresh)                           │
 │                                                                                 │
 │  GOTCHA: Error state persists until user action — there is no automatic         │
 │  reconnection polling. This is intentional to avoid hammering a downed          │
-│  service, but means the operator must manually verify recovery.                  │
+│  service, but means the operator must manually verify recovery.                 │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -108,18 +108,18 @@ UI in a loading state indefinitely.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│                    RACE CONDITION SCENARIO                                       │
+│                    RACE CONDITION SCENARIO                                      │
 │                                                                                 │
-│  Operator A: Editing device "PLC-1" name to "Main PLC"                         │
-│  Operator B: Editing device "PLC-1" port to 503                                │
+│  Operator A: Editing device "PLC-1" name to "Main PLC"                          │
+│  Operator B: Editing device "PLC-1" port to 503                                 │
 │                                                                                 │
 │  Timeline:                                                                      │
-│  T1: A reads device (name: "PLC-1", port: 502)                                │
-│  T2: B reads device (name: "PLC-1", port: 502)                                │
-│  T3: A saves (name: "Main PLC", port: 502)  ← A's change wins                 │
-│  T4: B saves (name: "PLC-1", port: 503)     ← B overwrites A's name change!   │
+│  T1: A reads device (name: "PLC-1", port: 502)                                  │
+│  T2: B reads device (name: "PLC-1", port: 502)                                  │
+│  T3: A saves (name: "Main PLC", port: 502)  ← A's change wins                   │
+│  T4: B saves (name: "PLC-1", port: 503)     ← B overwrites A's name change!     │
 │                                                                                 │
-│  Result: name reverted to "PLC-1", port changed to 503                         │
+│  Result: name reverted to "PLC-1", port changed to 503                          │
 │                                                                                 │
 │  This is a classic "lost update" problem.                                       │
 │                                                                                 │
@@ -209,13 +209,13 @@ networks or after long operations, the user may briefly see outdated data.
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │  COMMON MISTAKE                                                                 │
 │                                                                                 │
-│  ✗ Setting VITE_API_URL at Docker runtime (has no effect)                       │
-│    docker run -e VITE_API_URL=https://api.example.com nexus/web-ui             │
+│  - Setting VITE_API_URL at Docker runtime (has no effect)                       │
+│    docker run -e VITE_API_URL=https://api.example.com nexus/web-ui              │
 │                                                                                 │
-│  ✓ Setting VITE_API_URL at Docker BUILD time                                    │
-│    docker build --build-arg VITE_API_URL=https://api.example.com ...           │
+│  + Setting VITE_API_URL at Docker BUILD time                                    │
+│    docker build --build-arg VITE_API_URL=https://api.example.com ...            │ 
 │                                                                                 │
-│  Vite replaces import.meta.env.VITE_API_URL with a string literal              │
+│  Vite replaces import.meta.env.VITE_API_URL with a string literal               │
 │  during the build step. The runtime container has no access to Vite.            │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘

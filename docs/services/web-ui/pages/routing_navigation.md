@@ -13,20 +13,20 @@
 │                                                                                 │
 │  <BrowserRouter>                                                                │
 │  │                                                                              │
-│  ├── /auth/callback ─────── AuthCallbackPage     (public, no layout)           │
-│  ├── /login ─────────────── LoginPage            (public, no layout)           │
+│  ├── /auth/callback ─────── AuthCallbackPage     (public, no layout)            │
+│  ├── /login ─────────────── LoginPage            (public, no layout)            │
 │  │                                                                              │
-│  └── <ProtectedRoute> ──── (auth gate)                                         │
-│      └── <Layout> ──────── (sidebar + topbar + Outlet)                         │
+│  └── <ProtectedRoute> ──── (auth gate)                                          │
+│      └── <Layout> ──────── (sidebar + topbar + Outlet)                          │
 │          │                                                                      │
-│          ├── / ──────────── Navigate → /dashboard  (redirect)                  │
+│          ├── / ──────────── Navigate → /dashboard  (redirect)                   │
 │          ├── /dashboard ─── DashboardPage          (overview + stats)           │
 │          ├── /devices ───── DevicesPage            (device grid + CRUD)         │
 │          ├── /devices/:id ─ DeviceDetailPage       (tabs: overview/tags/config) │
 │          ├── /tags ──────── TagsPage               (global tag table)           │
 │          ├── /tags/:id ──── TagDetailPage           (single tag view)           │
 │          ├── /system ────── SystemPage             (health cards + diagram)     │
-│          └── /health ────── HealthPage             (Grafana iframe)            │
+│          └── /health ────── HealthPage             (Grafana iframe)             │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -77,7 +77,7 @@ Routes are defined in `App.tsx` using React Router v6's declarative API:
 │  ProtectedRoute renders                                                         │
 │       │                                                                         │
 │       ├── authEnabled === false                                                 │
-│       │   └── Render <Outlet /> (no auth required, pass through)               │
+│       │   └── Render <Outlet /> (no auth required, pass through)                │
 │       │                                                                         │
 │       ├── isLoading === true                                                    │
 │       │   └── Render loading spinner (auth state being determined)              │
@@ -103,15 +103,15 @@ The Layout component provides the persistent application shell:
 ```
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │ ┌────────┐                                                                   │
-│ │        │  NEXUS Edge                                     [User ▾] [⚙]     │
+│ │        │  NEXUS Edge                                     [User ▾] [*]      │
 │ │  SIDE  │  ─────────────────────────────────────────────────────────────    │
 │ │  BAR   │                                                                   │
 │ │        │  ┌────────────────────────────────────────────────────────────┐   │
-│ │ 📊 Dash│  │                                                            │   │
-│ │ 🔧 Dev │  │                                                            │   │
-│ │ 🏷 Tags│  │                <Outlet />                                   │   │
-│ │ 🖥 Sys │  │                                                            │   │
-│ │ 📈 Hlth│  │           Current page renders here                        │   │
+│ │ - Dash │  │                                                            │   │
+│ │ - Dev  │  │                                                            │   │
+│ │ - Tags │  │                <Outlet />                                  │   │
+│ │ - Sys  │  │                                                            │   │
+│ │ - Hlth │  │           Current page renders here                        │   │
 │ │        │  │                                                            │   │
 │ │        │  │                                                            │   │
 │ │        │  └────────────────────────────────────────────────────────────┘   │

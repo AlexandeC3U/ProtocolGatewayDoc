@@ -17,9 +17,9 @@ REST. This means:
 - **Simpler mental model** — "fetch, display, mutate, invalidate" is the entire data flow
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                      DATA OWNERSHIP MODEL                                       │
-│                                                                                 │
+┌────────────────────────────────────────────────────────────────────────────────┐
+│                      DATA OWNERSHIP MODEL                                      │
+│                                                                                │
 │  ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐           │
 │  │     Web UI      │     │  Gateway Core   │     │   PostgreSQL    │           │
 │  │                 │     │                 │     │                 │           │
@@ -28,11 +28,11 @@ REST. This means:
 │  │  Caches briefly │     │                 │     │                 │           │
 │  │  (5s stale)     │     │  Publishes MQTT │     │                 │           │
 │  └─────────────────┘     └─────────────────┘     └─────────────────┘           │
-│                                                                                 │
-│  The UI never writes to a local store that needs syncing.                       │
-│  Every mutation goes to the server; cache is invalidated on success.            │
-│                                                                                 │
-└─────────────────────────────────────────────────────────────────────────────────┘
+│                                                                                │
+│  The UI never writes to a local store that needs syncing.                      │
+│  Every mutation goes to the server; cache is invalidated on success.           │
+│                                                                                │
+└────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 **Trade-off:** No offline capability. Acceptable because NEXUS Edge operates on
@@ -137,13 +137,13 @@ specifics are isolated to:
 │    s7:         S7Config,              // Rack, slot, PDU                        │
 │    mqtt:       MqttConfig,            // Broker, client ID, credentials         │
 │    bacnet:     BacnetConfig,          // Device instance                        │
-│    ethernetip: EthernetipConfig,      // Slot number                           │
+│    ethernetip: EthernetipConfig,      // Slot number                            │
 │  };                                                                             │
 │                                                                                 │
 │  Usage in DeviceDialog:                                                         │
 │                                                                                 │
 │  const ConfigComponent = PROTOCOL_CONFIG_COMPONENTS[form.protocol];             │
-│  <ConfigComponent config={form.protocolConfig} onChange={handleConfigChange} />  │
+│  <ConfigComponent config={form.protocolConfig} onChange={handleConfigChange} /> │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -201,7 +201,7 @@ Auth is not hard-coded — it can be toggled at runtime:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│                    AUTH DETECTION FLOW                                           │
+│                    AUTH DETECTION FLOW                                          │
 │                                                                                 │
 │  App startup                                                                    │
 │       │                                                                         │
@@ -209,14 +209,14 @@ Auth is not hard-coded — it can be toggled at runtime:
 │  Fetch /.well-known/openid-configuration                                        │
 │       │                                                                         │
 │       ├── 200 OK ──> Auth is ENABLED                                            │
-│       │              • Login required                                            │
-│       │              • OIDC flow active                                          │
-│       │              • Bearer tokens on API calls                                │
-│       │                                                                          │
-│       └── Error ───> Auth is DISABLED                                            │
-│                      • No login screen                                           │
-│                      • All routes accessible                                     │
-│                      • No Bearer tokens                                          │
+│       │              • Login required                                           │
+│       │              • OIDC flow active                                         │
+│       │              • Bearer tokens on API calls                               │
+│       │                                                                         │
+│       └── Error ───> Auth is DISABLED                                           │
+│                      • No login screen                                          │
+│                      • All routes accessible                                    │
+│                      • No Bearer tokens                                         │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```

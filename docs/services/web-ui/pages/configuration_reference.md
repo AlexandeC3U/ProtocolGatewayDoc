@@ -22,15 +22,15 @@ time. Changing them requires a rebuild. They are NOT read at runtime.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│                    BUILD-TIME vs RUNTIME CONFIG                                  │
+│                    BUILD-TIME vs RUNTIME CONFIG                                 │
 │                                                                                 │
 │  Build-time (Vite):                                                             │
 │  ┌─────────────────────────────────────────────────────────────────────────┐    │
-│  │  VITE_API_URL, VITE_WS_URL                                             │    │
+│  │  VITE_API_URL, VITE_WS_URL                                              │    │
 │  │  → Replaced at build time by Vite                                       │    │
 │  │  → Embedded as string literals in the JS bundle                         │    │
 │  │  → Cannot change without rebuilding                                     │    │
-│  │  → Docker: pass as build args (--build-arg VITE_API_URL=...)           │    │
+│  │  → Docker: pass as build args (--build-arg VITE_API_URL=...)            │    │
 │  └─────────────────────────────────────────────────────────────────────────┘    │
 │                                                                                 │
 │  Runtime (Browser):                                                             │

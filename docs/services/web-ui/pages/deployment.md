@@ -15,7 +15,7 @@
 │       │                                                                         │
 │       ▼                                                                         │
 │  ┌──────────────────────────────────────────────────────────────────────────┐   │
-│  │  STAGE 1: BUILD (node:20-alpine)                                        │   │
+│  │  STAGE 1: BUILD (node:20-alpine)                                         │   │
 │  │                                                                          │   │
 │  │  1. Install pnpm globally                                                │   │
 │  │  2. Copy package.json + pnpm-lock.yaml                                   │   │
@@ -29,25 +29,25 @@
 │  │     └── Output: /app/dist/                                               │   │
 │  │                                                                          │   │
 │  │  Build args:                                                             │   │
-│  │  • VITE_API_URL — API base URL (baked into bundle)                      │   │
-│  │  • VITE_WS_URL — WebSocket URL (baked into bundle)                      │   │
+│  │  • VITE_API_URL — API base URL (baked into bundle)                       │   │
+│  │  • VITE_WS_URL — WebSocket URL (baked into bundle)                       │   │
 │  │                                                                          │   │
 │  └──────────────────────────────────────────────────────────────────────────┘   │
 │       │                                                                         │
-│       │  COPY dist/ → nginx html dir                                           │
-│       │  COPY nginx.conf                                                       │
+│       │  COPY dist/ → nginx html dir                                            │
+│       │  COPY nginx.conf                                                        │
 │       ▼                                                                         │
 │  ┌──────────────────────────────────────────────────────────────────────────┐   │
-│  │  STAGE 2: SERVE (nginx:alpine)                                          │   │
+│  │  STAGE 2: SERVE (nginx:alpine)                                           │   │
 │  │                                                                          │   │
-│  │  • Serves static files from /usr/share/nginx/html                       │   │
-│  │  • Reverse proxy: /api/* → gateway-core:3001                            │   │
-│  │  • Reverse proxy: /health/* → gateway-core:3001                         │   │
-│  │  • Reverse proxy: /grafana/* → grafana:3000                             │   │
-│  │  • SPA fallback: try_files $uri $uri/ /index.html                       │   │
-│  │  • Health check: wget localhost:80 (for Docker/K8s probes)              │   │
+│  │  • Serves static files from /usr/share/nginx/html                        │   │
+│  │  • Reverse proxy: /api/* → gateway-core:3001                             │   │
+│  │  • Reverse proxy: /health/* → gateway-core:3001                          │   │
+│  │  • Reverse proxy: /grafana/* → grafana:3000                              │   │
+│  │  • SPA fallback: try_files $uri $uri/ /index.html                        │   │
+│  │  • Health check: wget localhost:80 (for Docker/K8s probes)               │   │
 │  │                                                                          │   │
-│  │  Final image: ~25MB (nginx:alpine + static assets)                      │   │
+│  │  Final image: ~25MB (nginx:alpine + static assets)                       │   │
 │  │                                                                          │   │
 │  └──────────────────────────────────────────────────────────────────────────┘   │
 │                                                                                 │
@@ -156,14 +156,14 @@ server {
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                      NGINX PROXY MAP                                            │
 │                                                                                 │
-│  Browser Request          │  Proxied To                                        │
-│  ─────────────────────────┼────────────────────────────────────────────────    │
-│  GET /api/devices          │  http://gateway-core:3001/api/devices             │
-│  GET /api/tags?limit=25    │  http://gateway-core:3001/api/tags?limit=25       │
-│  GET /health/ready         │  http://gateway-core:3001/health/ready            │
-│  GET /grafana/d/abc/...    │  http://grafana:3000/d/abc/...                    │
-│  GET /devices/123          │  /usr/share/nginx/html/index.html (SPA)           │
-│  GET /assets/index-abc.js  │  /usr/share/nginx/html/assets/index-abc.js       │
+│  Browser Request           │  Proxied To                                        │
+│  ──────────────────────────┼────────────────────────────────────────────────    │
+│  GET /api/devices          │  http://gateway-core:3001/api/devices              │
+│  GET /api/tags?limit=25    │  http://gateway-core:3001/api/tags?limit=25        │
+│  GET /health/ready         │  http://gateway-core:3001/health/ready             │
+│  GET /grafana/d/abc/...    │  http://grafana:3000/d/abc/...                     │
+│  GET /devices/123          │  /usr/share/nginx/html/index.html (SPA)            │
+│  GET /assets/index-abc.js  │  /usr/share/nginx/html/assets/index-abc.js         │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```

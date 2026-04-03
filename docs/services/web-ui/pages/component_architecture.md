@@ -12,7 +12,7 @@
 │                          COMPONENT TREE                                         │
 │                                                                                 │
 │  <QueryClientProvider>                                                          │
-│    <AuthProvider>                                                                │
+│    <AuthProvider>                                                               │
 │      <BrowserRouter>                                                            │
 │        <Toaster />                                                              │
 │        <Routes>                                                                 │
@@ -51,18 +51,18 @@ The landing page providing at-a-glance platform status.
 │  Dashboard                                                                      │
 ├─────────────────────────────────────────────────────────────────────────────────┤
 │                                                                                 │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐        │
-│  │ Total Devices│  │Online Devices│  │  Total Tags  │  │System Status │        │
-│  │     12       │  │      8       │  │     156      │  │   Healthy    │        │
-│  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘        │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐         │
+│  │ Total Devices│  │Online Devices│  │  Total Tags  │  │System Status │         │
+│  │     12       │  │      8       │  │     156      │  │   Healthy    │         │
+│  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘         │
 │                                                                                 │
 │  Recent Devices                           System Health                         │
 │  ┌────────────────────────────────┐       ┌──────────────────────────┐          │
-│  │ ● Production PLC    modbus    │       │ ● Database      Online  │          │
-│  │ ● OPC UA Server     opcua     │       │ ● MQTT Broker   Online  │          │
-│  │ ● S7-1500           s7        │       │                         │          │
-│  │ ● Temp Sensor       mqtt      │       │                         │          │
-│  │ ● BACnet Device     bacnet    │       │                         │          │
+│  │ ● Production PLC    modbus     │       │ ● Database      Online   │          │
+│  │ ● OPC UA Server     opcua      │       │ ● MQTT Broker   Online   │          │
+│  │ ● S7-1500           s7         │       │                          │          │
+│  │ ● Temp Sensor       mqtt       │       │                          │          │
+│  │ ● BACnet Device     bacnet     │       │                          │          │
 │  └────────────────────────────────┘       └──────────────────────────┘          │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
@@ -83,29 +83,29 @@ The primary device management interface.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│  Devices                                                        [+ Add Device] │
+│  Devices                                                        [+ Add Device]  │
 ├─────────────────────────────────────────────────────────────────────────────────┤
 │                                                                                 │
 │  [Search...            ] [Protocol ▾] [Status ▾]                                │
 │                                                                                 │
-│  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐              │
-│  │█                 │  │█                 │  │█                 │              │
-│  │█ Production PLC  │  │█ OPC UA Server   │  │█ S7-1500         │              │
-│  │█                 │  │█                 │  │█                 │              │
-│  │█ modbus-tcp      │  │█ opcua           │  │█ s7              │              │
-│  │█ 192.168.1.100   │  │█ 192.168.1.101   │  │█ 192.168.1.102   │              │
-│  │█ :502            │  │█ :4840           │  │█ :102            │              │
-│  │█                 │  │█                 │  │█                 │              │
-│  │█ ● Online        │  │█ ● Online        │  │█ ◐ Error         │              │
-│  │█ 1000ms poll     │  │█ 2000ms poll     │  │█ 500ms poll      │              │
-│  │█                 │  │█                 │  │█                 │              │
-│  │█ ○──●──○──○      │  │█ ○──○──●──○      │  │█ ●──○──○──○      │              │
-│  │█ Setup: Connected│  │█ Setup: Config'd │  │█ Setup: Created  │              │
-│  │█                 │  │█                 │  │█                 │              │
-│  │█  [Edit] [⋮]     │  │█  [Edit] [⋮]     │  │█  [Edit] [⋮]     │              │
-│  └──────────────────┘  └──────────────────┘  └──────────────────┘              │
+│  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐               │
+│  │█                 │  │█                 │  │█                 │               │
+│  │█ Production PLC  │  │█ OPC UA Server   │  │█ S7-1500         │               │
+│  │█                 │  │█                 │  │█                 │               │
+│  │█ modbus-tcp      │  │█ opcua           │  │█ s7              │               │
+│  │█ 192.168.1.100   │  │█ 192.168.1.101   │  │█ 192.168.1.102   │               │
+│  │█ :502            │  │█ :4840           │  │█ :102            │               │
+│  │█                 │  │█                 │  │█                 │               │
+│  │█ ● Online        │  │█ ● Online        │  │█ ● Error         │               │
+│  │█ 1000ms poll     │  │█ 2000ms poll     │  │█ 500ms poll      │               │
+│  │█                 │  │█                 │  │█                 │               │
+│  │█ ○──●──○──○      │  │█ ○──○──●──○      │  │█ ●──○──○──○      │               │
+│  │█ Setup: Connected│  │█ Setup: Config'd │  │█ Setup: Created  │               │
+│  │█                 │  │█                 │  │█                 │               │
+│  │█  [Edit]         │  │█  [Edit]         │  │█  [Edit]         │               │
+│  └──────────────────┘  └──────────────────┘  └──────────────────┘               │
 │                                                                                 │
-│  █ = Protocol color sidebar stripe (blue=modbus, amber=opcua, green=s7)        │
+│  █ = Protocol color sidebar stripe (blue=modbus, amber=opcua, green=s7)         │
 │  ● = Setup progress stepper (Created → Connected → Configured → Active)         │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
@@ -127,38 +127,38 @@ Full device view with three tabs.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│  ← Back    Production PLC                    [Test] [Toggle] [Edit] [Delete]   │
+│  ← Back    Production PLC                    [Test] [Toggle] [Edit] [Delete]    │
 │            modbus-tcp · ● Online · Setup: Connected                             │
 ├─────────────────────────────────────────────────────────────────────────────────┤
 │  [Overview]  [Tags (24)]  [Configuration]                                       │
 ├─────────────────────────────────────────────────────────────────────────────────┤
 │                                                                                 │
 │  OVERVIEW TAB:                                                                  │
-│  ┌─────────────────────────────┐  ┌─────────────────────────────┐              │
-│  │ Connection                  │  │ Configuration               │              │
-│  │                             │  │                             │              │
-│  │ Protocol: modbus-tcp        │  │ Poll Interval: 1000ms       │              │
-│  │ Host: 192.168.1.100         │  │ Timeout: 5000ms             │              │
-│  │ Port: 502                   │  │ Retries: 3                  │              │
-│  └─────────────────────────────┘  └─────────────────────────────┘              │
-│  ┌─────────────────────────────┐  ┌─────────────────────────────┐              │
-│  │ Status                      │  │ Metadata                    │              │
-│  │                             │  │                             │              │
-│  │ Status: Online              │  │ Created: 2026-03-15 10:30   │              │
-│  │ Setup: Connected            │  │ Updated: 2026-03-20 14:22   │              │
-│  │ Enabled: Yes                │  │                             │              │
-│  │ Last Error: —               │  │                             │              │
-│  └─────────────────────────────┘  └─────────────────────────────┘              │
+│  ┌─────────────────────────────┐  ┌─────────────────────────────┐               │
+│  │ Connection                  │  │ Configuration               │               │
+│  │                             │  │                             │               │
+│  │ Protocol: modbus-tcp        │  │ Poll Interval: 1000ms       │               │
+│  │ Host: 192.168.1.100         │  │ Timeout: 5000ms             │               │ 
+│  │ Port: 502                   │  │ Retries: 3                  │               │
+│  └─────────────────────────────┘  └─────────────────────────────┘               │
+│  ┌─────────────────────────────┐  ┌─────────────────────────────┐               │
+│  │ Status                      │  │ Metadata                    │               │
+│  │                             │  │                             │               │
+│  │ Status: Online              │  │ Created: 2026-03-15 10:30   │               │
+│  │ Setup: Connected            │  │ Updated: 2026-03-20 14:22   │               │
+│  │ Enabled: Yes                │  │                             │               │
+│  │ Last Error: —               │  │                             │               │
+│  └─────────────────────────────┘  └─────────────────────────────┘               │
 │                                                                                 │
 │  TAGS TAB:                                                                      │
 │  ┌─────────────────────────────────────────────────────────────────────────┐    │
-│  │ [Browse OPC UA]  [+ Add Tag]                                           │    │
+│  │ [Browse OPC UA]  [+ Add Tag]                                            │    │
 │  │                                                                         │    │
-│  │ Name          │ Address        │ Type    │ Mode │ Unit │ On │ Actions  │    │
-│  │───────────────┼────────────────┼─────────┼──────┼──────┼────┼──────────│    │
-│  │ temperature   │ HR:40001       │ float32 │ read │ °C   │ ✓  │ [E] [D] │    │
-│  │ pressure      │ HR:40003       │ float32 │ read │ bar  │ ✓  │ [E] [D] │    │
-│  │ motor_speed   │ HR:40005       │ uint16  │ r/w  │ RPM  │ ✗  │ [E] [D] │    │
+│  │ Name          │ Address        │ Type    │ Mode │ Unit │ On │ Actions   │    │
+│  │───────────────┼────────────────┼─────────┼──────┼──────┼────┼───────────│    │
+│  │ temperature   │ HR:40001       │ float32 │ read │ °C   │ Y  │ [E] [D]   │    │
+│  │ pressure      │ HR:40003       │ float32 │ read │ bar  │ Y  │ [E] [D]   │    │
+│  │ motor_speed   │ HR:40005       │ uint16  │ r/w  │ RPM  │ N  │ [E] [D]   │    │
 │  └─────────────────────────────────────────────────────────────────────────┘    │
 │                                                                                 │
 │  CONFIGURATION TAB:                                                             │
@@ -178,17 +178,17 @@ Global tag management with pagination and advanced filters.
 │  Tags                                                                           │
 ├─────────────────────────────────────────────────────────────────────────────────┤
 │                                                                                 │
-│  [Search...       ] [Device ▾] [Data Type ▾] [Access Mode ▾]                   │
+│  [Search...       ] [Device ▾] [Data Type ▾] [Access Mode ▾]                    │
 │                                                                                 │
-│  Name          │ Device         │ Address     │ Type    │ Mode │ Unit │ On     │
-│  ──────────────┼────────────────┼─────────────┼─────────┼──────┼──────┼─────── │
-│  temperature   │ Production PLC │ HR:40001    │ float32 │ read │ °C   │ ✓      │
-│  pressure      │ Production PLC │ HR:40003    │ float32 │ read │ bar  │ ✓      │
-│  motor_speed   │ Production PLC │ HR:40005    │ uint16  │ r/w  │ RPM  │ ✗      │
-│  node_temp     │ OPC UA Server  │ ns=2;s=Tmp  │ float64 │ read │ °C   │ ✓      │
-│  ...           │                │             │         │      │      │        │
+│  Name          │ Device         │ Address     │ Type    │ Mode │ Unit │ On      │
+│  ──────────────┼────────────────┼─────────────┼─────────┼──────┼──────┼───────  │
+│  temperature   │ Production PLC │ HR:40001    │ float32 │ read │ °C   │ Y       │
+│  pressure      │ Production PLC │ HR:40003    │ float32 │ read │ bar  │ Y       │
+│  motor_speed   │ Production PLC │ HR:40005    │ uint16  │ r/w  │ RPM  │ N       │
+│  node_temp     │ OPC UA Server  │ ns=2;s=Tmp  │ float64 │ read │ °C   │ Y       │
+│  ...           │                │             │         │      │      │         │
 │                                                                                 │
-│  Showing 1-25 of 156 tags                              [← Prev] [Next →]       │
+│  Showing 1-25 of 156 tags                              [← Prev] [Next →]        │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -209,21 +209,21 @@ Service health monitoring and architecture visualization.
 │  System                                                                         │
 ├─────────────────────────────────────────────────────────────────────────────────┤
 │                                                                                 │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐        │
-│  │ Gateway Core │  │  PostgreSQL  │  │ MQTT Broker  │  │  WebSocket   │        │
-│  │              │  │              │  │              │  │              │        │
-│  │  ● Online    │  │  ● Online    │  │  ● Online    │  │  ◐ Degraded  │        │
-│  │  v2.0.0      │  │  v16.1       │  │  v5.x        │  │  12 clients  │        │
-│  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘        │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐         │
+│  │ Gateway Core │  │  PostgreSQL  │  │ MQTT Broker  │  │  WebSocket   │         │
+│  │              │  │              │  │              │  │              │         │
+│  │  ● Online    │  │  ● Online    │  │  ● Online    │  │  ● Degraded  │         │
+│  │  v2.0.0      │  │  v16.1       │  │  v5.x        │  │  12 clients  │         │
+│  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘         │
 │                                                                                 │
 │  ┌─────────────────────────────────────────────────────────────────────────┐    │
-│  │                    ARCHITECTURE DIAGRAM (React Flow)                     │    │
+│  │                    ARCHITECTURE DIAGRAM (React Flow)                    │    │
 │  │                                                                         │    │
-│  │  ┌────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐            │    │
-│  │  │ Web UI │───>│ Gateway  │───>│PostgreSQL│    │ Authentik│            │    │
-│  │  │        │    │ Core     │───>│          │    │          │            │    │
-│  │  │        │    │          │───>│   EMQX   │    │          │            │    │
-│  │  └────────┘    └──────────┘    └──────────┘    └──────────┘            │    │
+│  │  ┌────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐             │    │
+│  │  │ Web UI │───>│ Gateway  │───>│PostgreSQL│    │ Authentik│             │    │
+│  │  │        │    │ Core     │───>│          │    │          │             │    │
+│  │  │        │    │          │───>│   EMQX   │    │          │             │    │
+│  │  └────────┘    └──────────┘    └──────────┘    └──────────┘             │    │
 │  │                     │                                                   │    │
 │  │              ┌──────▼──────┐                                            │    │
 │  │              │  Protocol   │                                            │    │
@@ -273,11 +273,11 @@ The main application shell wrapping all protected routes.
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│  ┌──────┐  NEXUS Edge                             [User] [⚙]   │
+│  ┌──────┐  NEXUS Edge                             [User] [⚙]     │
 │  │      │                                                        │
 │  │ SIDE │  ┌──────────────────────────────────────────────────┐  │
 │  │ BAR  │  │                                                  │  │
-│  │      │  │              <Outlet />                           │  │
+│  │      │  │              <Outlet />                          │  │
 │  │ 📊   │  │                                                  │  │
 │  │ 🔧   │  │           (page content rendered here)           │  │
 │  │ 🏷️   │  │                                                  │  │
@@ -396,18 +396,18 @@ interface ProtocolConfigProps {
 ### Protocol Defaults
 
 ```
-┌────────────────────────────────────────────────────────────────────────────┐
+┌───────────────────────────────────────────────────────────────────────────┐
 │ Protocol      │ Default Fields                                            │
 │───────────────┼───────────────────────────────────────────────────────────│
-│ modbus        │ slaveId: 1, timeout: 5000, retries: 3                    │
-│ opcua         │ securityPolicy: "None", securityMode: "None",            │
+│ modbus        │ slaveId: 1, timeout: 5000, retries: 3                     │
+│ opcua         │ securityPolicy: "None", securityMode: "None",             │
 │               │ authentication: "anonymous", publishInterval: 1000,       │
 │               │ queueSize: 10                                             │
-│ s7            │ rack: 0, slot: 1, pduSize: 960                           │
-│ mqtt          │ brokerUrl: "", clientId: "", qos: 1                      │
+│ s7            │ rack: 0, slot: 1, pduSize: 960                            │
+│ mqtt          │ brokerUrl: "", clientId: "", qos: 1                       │
 │ bacnet        │ deviceInstance: 0                                         │
 │ ethernetip    │ slot: 0                                                   │
-└────────────────────────────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -422,22 +422,22 @@ OPC UA address spaces.
 │                      BROWSE DIALOG ARCHITECTURE                                 │
 │                                                                                 │
 │  BrowseDialog                                                                   │
-│  ├── State: tree (BrowseNode[]), selected (Set<string>), filter (string)       │
+│  ├── State: tree (BrowseNode[]), selected (Set<string>), filter (string)        │
 │  │                                                                              │
-│  ├── Initial load: POST /devices/{id}/browse { nodeId: "i=85" }               │
-│  │   Returns root children (Objects, Types, Views folders)                     │
+│  ├── Initial load: POST /devices/{id}/browse { nodeId: "i=85" }                 │
+│  │   Returns root children (Objects, Types, Views folders)                      │
 │  │                                                                              │
-│  ├── Expand node: POST /devices/{id}/browse { nodeId: "ns=2;s=..." }          │
-│  │   Returns children, merged into tree via recursive update                   │
+│  ├── Expand node: POST /devices/{id}/browse { nodeId: "ns=2;s=..." }            │
+│  │   Returns children, merged into tree via recursive update                    │
 │  │                                                                              │
 │  ├── Selection rules:                                                           │
 │  │   ├── Only Variable nodes are selectable (checkbox)                          │
-│  │   ├── Object nodes show "Select all children" button                        │
-│  │   └── Selection stored as Set<nodeId>                                       │
+│  │   ├── Object nodes show "Select all children" button                         │
+│  │   └── Selection stored as Set<nodeId>                                        │
 │  │                                                                              │
-│  └── "Add Selected Tags": creates tags in bulk via POST /tags/bulk             │
-│      Maps each selected node to a tag:                                         │
-│      { name: browseName, address: nodeId, dataType: mapped, ... }              │
+│  └── "Add Selected Tags": creates tags in bulk via POST /tags/bulk              │
+│      Maps each selected node to a tag:                                          │
+│      { name: browseName, address: nodeId, dataType: mapped, ... }               │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```

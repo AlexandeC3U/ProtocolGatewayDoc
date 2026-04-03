@@ -56,15 +56,15 @@ operators, engineers, and administrators a single pane of glass for:
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                           DEVICE LIFECYCLE                                      │
 │                                                                                 │
-│  ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐                  │
-│  │ Created  │───>│Connected │───>│Configured│───>│  Active  │                  │
-│  └──────────┘    └──────────┘    └──────────┘    └──────────┘                  │
+│  ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐                   │
+│  │ Created  │───>│Connected │───>│Configured│───>│  Active  │                   │
+│  └──────────┘    └──────────┘    └──────────┘    └──────────┘                   │
 │       │               │               │               │                         │
-│   Create form    Test connection  Browse tags     Enable device                │
-│   Set protocol   Validate params  Add/configure   Start polling               │
-│   Set address    Check reachable  Set intervals   Monitor status              │
+│   Create form    Test connection  Browse tags     Enable device                 │
+│   Set protocol   Validate params  Add/configure   Start polling                 │
+│   Set address    Check reachable  Set intervals   Monitor status                │
 │                                                                                 │
-│  Visual stepper on Device Detail page tracks progress through phases           │
+│  Visual stepper on Device Detail page tracks progress through phases            │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```

@@ -18,33 +18,33 @@ crypto APIs — no `oidc-client-ts`, no `@auth0/auth0-react`, no auth middleware
 │  ┌───────────────────────────────────────────────────────────────────────────┐  │
 │  │                          WEB UI (Browser)                                 │  │
 │  │                                                                           │  │
-│  │  ┌─────────────┐  ┌──────────────────┐  ┌──────────────────────────────┐ │  │
-│  │  │  auth.ts    │  │  AuthContext.tsx  │  │  ProtectedRoute.tsx         │ │  │
-│  │  │             │  │                  │  │                              │ │  │
-│  │  │ PKCE gen    │  │  AuthProvider    │  │  Wraps all app routes       │ │  │
-│  │  │ Token fetch │  │  useAuth hook    │  │  Checks isAuthenticated     │ │  │
-│  │  │ Token store │  │  State: user,    │  │  Redirects to /login        │ │  │
-│  │  │ 401 refresh │  │  token, roles    │  │  or renders children        │ │  │
-│  │  │             │  │  login/logout    │  │                              │ │  │
-│  │  └──────┬──────┘  └────────┬─────────┘  └──────────────────────────────┘ │  │
-│  │         │                  │                                               │  │
+│  │  ┌─────────────┐  ┌──────────────────┐  ┌──────────────────────────────┐  │  │
+│  │  │  auth.ts    │  │  AuthContext.tsx │  │  ProtectedRoute.tsx          │  │  │
+│  │  │             │  │                  │  │                              │  │  │
+│  │  │ PKCE gen    │  │  AuthProvider    │  │  Wraps all app routes        │  │  │
+│  │  │ Token fetch │  │  useAuth hook    │  │  Checks isAuthenticated      │  │  │
+│  │  │ Token store │  │  State: user,    │  │  Redirects to /login         │  │  │
+│  │  │ 401 refresh │  │  token, roles    │  │  or renders children         │  │  │
+│  │  │             │  │  login/logout    │  │                              │  │  │
+│  │  └──────┬──────┘  └────────┬─────────┘  └──────────────────────────────┘  │  │
+│  │         │                  │                                              │  │
 │  │         │    Token storage: sessionStorage                                │  │
 │  │         │    Keys: access_token, refresh_token, pkce_verifier             │  │
-│  │         │                                                                  │  │
-│  └─────────┼──────────────────┼───────────────────────────────────────────────┘  │
-│            │                  │                                                   │
-│  ┌─────────▼──────────────────▼───────────────────────────────────────────────┐  │
-│  │                         AUTHENTIK (OIDC Provider)                          │  │
-│  │                                                                            │  │
+│  │         │                                                                 │  │
+│  └─────────┼──────────────────┼──────────────────────────────────────────────┘  │
+│            │                  │                                                 │
+│  ┌─────────▼──────────────────▼──────────────────────────────────────────────┐  │
+│  │                         AUTHENTIK (OIDC Provider)                         │  │
+│  │                                                                           │  │
 │  │  /.well-known/openid-configuration  ←  Runtime discovery                  │  │
-│  │  /authorize                          ←  PKCE authorization request         │  │
-│  │  /token                              ←  Code-for-token exchange            │  │
-│  │  /userinfo                           ←  User profile + roles               │  │
-│  │  /end-session                        ←  Logout (revoke session)            │  │
-│  │                                                                            │  │
-│  └────────────────────────────────────────────────────────────────────────────┘  │
-│                                                                                  │
-└──────────────────────────────────────────────────────────────────────────────────┘
+│  │  /authorize                          ←  PKCE authorization request        │  │
+│  │  /token                              ←  Code-for-token exchange           │  │
+│  │  /userinfo                           ←  User profile + roles              │  │
+│  │  /end-session                        ←  Logout (revoke session)           │  │
+│  │                                                                           │  │
+│  └───────────────────────────────────────────────────────────────────────────┘  │
+│                                                                                 │
+└─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -101,7 +101,7 @@ environments. No build-time flags needed.
 │                                                                                 │
 │  1. Generate code_verifier (43-128 char random string)                          │
 │     crypto.getRandomValues(new Uint8Array(32))                                  │
-│     → base64url encode → 43-char string                                        │
+│     → base64url encode → 43-char string                                         │
 │                                                                                 │
 │  2. Derive code_challenge                                                       │
 │     SHA-256(code_verifier)                                                      │
@@ -113,7 +113,7 @@ environments. No build-time flags needed.
 │                                                                                 │
 │  Note: All crypto operations use Web Crypto API:                                │
 │  - crypto.getRandomValues() for random bytes                                    │
-│  - crypto.subtle.digest('SHA-256', ...) for hashing                            │
+│  - crypto.subtle.digest('SHA-256', ...) for hashing                             │
 │  - No external dependencies                                                     │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
@@ -240,9 +240,9 @@ Every API call in `lib/api.ts` attaches the Bearer token:
 │  Check: has refresh_token?                                                      │
 │       │                                                                         │
 │       ├── Yes: POST {token_endpoint}                                            │
-│       │        grant_type=refresh_token                                          │
-│       │        &refresh_token={refresh_token}                                    │
-│       │        &client_id={client_id}                                            │
+│       │        grant_type=refresh_token                                         │
+│       │        &refresh_token={refresh_token}                                   │
+│       │        &client_id={client_id}                                           │
 │       │   │                                                                     │
 │       │   ├── 200 OK: store new tokens, retry original request                  │
 │       │   │                                                                     │
@@ -259,7 +259,7 @@ Every API call in `lib/api.ts` attaches the Bearer token:
 │  │    → Do NOT redirect again                                              │    │
 │  │    → Show error to user instead                                         │    │
 │  │                                                                         │    │
-│  │  This prevents: 401 → login → callback → 401 → login → ... (loop)     │    │
+│  │  This prevents: 401 → login → callback → 401 → login → ... (loop)       │    │
 │  └─────────────────────────────────────────────────────────────────────────┘    │
 │                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
@@ -273,19 +273,19 @@ User roles are extracted from JWT claims returned by Authentik:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│                    ROLE HIERARCHY                                                │
+│                    ROLE HIERARCHY                                               │
 │                                                                                 │
 │  Authentik groups → JWT claims → Web UI roles                                   │
 │                                                                                 │
-│  ┌─────────────┐     ┌──────────────┐     ┌──────────────┐                     │
+│  ┌──────────────┐     ┌──────────────┐     ┌──────────────┐                     │
 │  │  Authentik   │     │  JWT Claim   │     │   UI Role    │                     │
 │  │  Group       │────>│  groups[]    │────>│              │                     │
-│  ├─────────────┤     ├──────────────┤     ├──────────────┤                     │
+│  ├──────────────┤     ├──────────────┤     ├──────────────┤                     │
 │  │ nexus-admin  │     │ "nexus-admin"│     │ admin        │  Full access        │
 │  │ nexus-eng    │     │ "nexus-eng"  │     │ engineer     │  CRUD devices/tags  │
 │  │ nexus-op     │     │ "nexus-op"   │     │ operator     │  View + toggle      │
 │  │ nexus-viewer │     │ "nexus-view" │     │ viewer       │  Read-only          │
-│  └─────────────┘     └──────────────┘     └──────────────┘                     │
+│  └──────────────┘     └──────────────┘     └──────────────┘                     │
 │                                                                                 │
 │  Priority: admin > engineer > operator > viewer                                 │
 │  If user belongs to multiple groups, highest role wins.                         │

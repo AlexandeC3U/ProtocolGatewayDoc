@@ -195,22 +195,22 @@ interface Tag {
 ### Protocol-Specific Configs
 
 ```
-┌────────────────────────────────────────────────────────────────────────────┐
+┌───────────────────────────────────────────────────────────────────────────┐
 │ Protocol     │ Config Interface Fields                                    │
 │──────────────┼────────────────────────────────────────────────────────────│
-│ modbus       │ slaveId: number                                           │
+│ modbus       │ slaveId: number                                            │
 │              │ timeout: number (ms)                                       │
 │              │ retries: number                                            │
 │──────────────┼────────────────────────────────────────────────────────────│
-│ opcua        │ securityPolicy: "None" | "Basic256" | "Basic256Sha256"    │
-│              │ securityMode: "None" | "Sign" | "SignAndEncrypt"          │
-│              │ authentication: "anonymous" | "username" | "certificate"  │
+│ opcua        │ securityPolicy: "None" | "Basic256" | "Basic256Sha256"     │
+│              │ securityMode: "None" | "Sign" | "SignAndEncrypt"           │
+│              │ authentication: "anonymous" | "username" | "certificate"   │
 │              │ username?: string                                          │
 │              │ password?: string                                          │
 │              │ publishInterval: number (ms)                               │
 │              │ queueSize: number                                          │
 │──────────────┼────────────────────────────────────────────────────────────│
-│ s7           │ rack: number (0-7)                                        │
+│ s7           │ rack: number (0-7)                                         │
 │              │ slot: number (0-31)                                        │
 │              │ pduSize: number (bytes, default 960)                       │
 │──────────────┼────────────────────────────────────────────────────────────│
@@ -218,12 +218,12 @@ interface Tag {
 │              │ clientId: string                                           │
 │              │ username?: string                                          │
 │              │ password?: string                                          │
-│              │ qos: 0 | 1 | 2                                            │
+│              │ qos: 0 | 1 | 2                                             │
 │──────────────┼────────────────────────────────────────────────────────────│
 │ bacnet       │ deviceInstance: number                                     │
 │──────────────┼────────────────────────────────────────────────────────────│
-│ ethernetip   │ slot: number                                              │
-└────────────────────────────────────────────────────────────────────────────┘
+│ ethernetip   │ slot: number                                               │
+└───────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -259,7 +259,7 @@ class ApiError extends Error {
 │       ├── 401 (Unauthorized)                                                    │
 │       │   ├── Attempt token refresh                                             │
 │       │   ├── Success → retry original request                                  │
-│       │   └── Failure → redirect to /login (with 30s loop guard)               │
+│       │   └── Failure → redirect to /login (with 30s loop guard)                │
 │       │                                                                         │
 │       ├── 404 (Not Found)                                                       │
 │       │   └── throw ApiError(404, "Resource not found")                         │
