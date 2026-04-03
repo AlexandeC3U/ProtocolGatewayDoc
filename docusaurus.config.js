@@ -3,8 +3,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Protocol Gateway',
-  tagline: 'Industrial data acquisition — Modbus · OPC UA · Siemens S7 → MQTT',
+  title: 'Conduit Edge',
+  tagline: 'Industrial IoT platform — Protocol Gateway · Data Ingestion · Gateway Core · Web UI',
   favicon: 'img/favicon.ico',
 
   future: {
@@ -12,10 +12,10 @@ const config = {
   },
 
   url: 'https://AlexandeC3U.github.io',
-  baseUrl: '/ProtocolGatewayDoc/',
+  baseUrl: '/ConduitEdge/',
 
   organizationName: 'AlexandeC3U',
-  projectName: 'ProtocolGatewayDoc',
+  projectName: 'ConduitEdge',
   trailingSlash: false,
 
   onBrokenLinks: 'warn',
@@ -26,13 +26,17 @@ const config = {
     locales: ['en'],
   },
 
+  markdown: {
+    format: 'detect',
+  },
+
   presets: [
     [
       'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          path: './markdown',
+          path: './docs',
           sidebarPath: './sidebars.js',
         },
         blog: false,
@@ -53,7 +57,7 @@ const config = {
         respectPrefersColorScheme: false,
       },
       navbar: {
-        title: 'Protocol Gateway',
+        title: 'Conduit Edge',
         style: 'dark',
 
         items: [
@@ -72,22 +76,21 @@ const config = {
             title: 'Documentation',
             items: [
               { label: 'Overview', to: '/docs' },
-              { label: 'Executive Summary', to: '/docs/pages/summary' },
-              { label: 'System Overview', to: '/docs/pages/system_overview' },
-              { label: 'Deployment', to: '/docs/pages/deployment_architecture' },
+              { label: 'Architecture', to: '/docs/ARCHITECTURE' },
+              { label: 'Infrastructure', to: '/docs/infrastructure' },
             ],
           },
           {
-            title: 'Protocols & Infrastructure',
+            title: 'Services',
             items: [
-              { label: 'Protocol Adapters', to: '/docs/pages/protocol_adapters' },
-              { label: 'Connection Management', to: '/docs/pages/connection_management' },
-              { label: 'Resilience Patterns', to: '/docs/pages/resilience_patterns' },
-              { label: 'Security Architecture', to: '/docs/pages/security_architecture' },
+              { label: 'Protocol Gateway', to: '/docs/services/protocol-gateway' },
+              { label: 'Gateway Core', to: '/docs/services/gateway-core' },
+              { label: 'Data Ingestion', to: '/docs/services/data-ingestion' },
+              { label: 'Web UI', to: '/docs/services/web-ui' },
             ],
           },
         ],
-        copyright: `Protocol Gateway Documentation v2.3.0 · Updated February 2026`,
+        copyright: `Conduit Edge Documentation · Updated April 2026`,
       },
       prism: {
         theme: prismThemes.github,

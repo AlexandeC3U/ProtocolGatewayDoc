@@ -10,71 +10,61 @@ import styles from './index.module.css';
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const STATS = [
-  { number: '4',      label: 'Industrial Protocols',  sub: 'Modbus TCP · RTU · OPC UA · S7' },
-  { number: '~67 MB', label: 'Container Image',        sub: 'Compiled Go binary, minimal deps' },
-  { number: '10 000', label: 'MQTT Buffer Slots',      sub: 'Ring buffer, configurable QoS 0/1/2' },
-  { number: '3-tier', label: 'Circuit Breakers',       sub: 'Per-device fault isolation' },
+  { number: '6',       label: 'Industrial Protocols',  sub: 'Modbus TCP · RTU · OPC UA · S7 · BACnet · EtherNet/IP' },
+  { number: '5',       label: 'Core Services',          sub: 'Gateway · Ingestion · Core API · Web UI · Auth' },
+  { number: 'MQTT',    label: 'Unified Namespace',      sub: 'EMQX broker, UNS topic hierarchy' },
+  { number: 'Full',    label: 'Observability Stack',    sub: 'Prometheus · Grafana · TimescaleDB' },
 ];
 
 const FEATURES = [
   {
-    title: 'Per-Device Connection Pools',
+    title: 'Protocol Gateway',
     accent: 'teal',
     icon: '⚡',
-    body: 'Each device owns its own pool with idle-connection reaping and MaxTTL rotation — no thundering herd on restart.',
+    body: 'Industrial data acquisition in Go — Modbus, OPC UA, S7 adapters with per-device connection pools and circuit breakers.',
   },
   {
-    title: 'Multi-Tier Circuit Breakers',
+    title: 'Gateway Core',
     accent: 'red',
-    icon: '🛡️',
-    body: 'sony/gobreaker wired per device. Trips on consecutive failures, recovers via configurable half-open probes.',
+    icon: '🔀',
+    body: 'Fastify-based API gateway with WebSocket bridge, middleware pipeline, MQTT integration, and reverse proxy layer.',
   },
   {
-    title: 'Priority-Based Polling',
+    title: 'Data Ingestion',
     accent: 'purple',
-    icon: '⚙️',
-    body: 'Worker pool with jitter, back-pressure skip, and load shaping so high-priority tags always get serviced first.',
+    icon: '📥',
+    body: 'High-throughput MQTT-to-TimescaleDB pipeline using PostgreSQL COPY protocol for efficient time-series storage.',
   },
   {
-    title: 'MQTT Publishing',
+    title: 'Web UI',
     accent: 'teal',
-    icon: '📡',
-    body: 'Eclipse Paho client with a 10 000-message ring buffer, auto-reconnect, and UNS-structured topic hierarchy.',
+    icon: '🖥️',
+    body: 'React SPA with real-time dashboards, OIDC authentication via Authentik, and a comprehensive design system.',
   },
   {
     title: 'Full Observability',
     accent: 'red',
     icon: '📊',
-    body: 'Prometheus metrics, zerolog structured logs, health endpoints with flapping protection, and NTP drift tracking.',
+    body: 'Prometheus metrics from every service, Grafana dashboards, structured logging, and health endpoints with flapping protection.',
   },
   {
-    title: 'Clean Hexagonal Architecture',
+    title: 'Production Infrastructure',
     accent: 'purple',
     icon: '🏛️',
-    body: 'Pure domain core with zero external dependencies. Adapters plug in via interfaces — swappable without touching domain logic.',
+    body: 'Docker Compose & Kubernetes deployments, Nginx reverse proxy, TLS termination, Authentik OIDC, and automated backups.',
   },
 ];
 
-const CHAPTERS = [
-  { num: '01', title: 'Executive Summary',        href: '/docs/pages/summary',                    desc: 'Purpose, capabilities & philosophy' },
-  { num: '02', title: 'System Overview',           href: '/docs/pages/system_overview',            desc: 'High-level architecture & tech stack' },
-  { num: '03', title: 'Architectural Principles',  href: '/docs/pages/architectural_principles',   desc: 'Clean Architecture, DI, interface segregation' },
-  { num: '04', title: 'Layer Architecture',        href: '/docs/pages/layer_architecture',         desc: 'Domain & adapter layer structure' },
-  { num: '05', title: 'Domain Model',              href: '/docs/pages/domain_model',               desc: 'Entities, validation logic, error taxonomy' },
-  { num: '06', title: 'Protocol Adapters',         href: '/docs/pages/protocol_adapters',          desc: 'Modbus TCP/RTU, OPC UA, S7, MQTT publisher' },
-  { num: '07', title: 'Connection Management',     href: '/docs/pages/connection_management',      desc: 'Pooling strategies, idle reaping, MaxTTL' },
-  { num: '08', title: 'Data Flow Architecture',    href: '/docs/pages/dataflow_architecture',      desc: 'Read path (polling), write path, workers' },
-  { num: '09', title: 'Resilience Patterns',       href: '/docs/pages/resilience_patterns',        desc: 'Circuit breakers, retry/backoff, degradation' },
-  { num: '10', title: 'Observability',             href: '/docs/pages/observability_infrastructure', desc: 'Prometheus, structured logs, health checks' },
-  { num: '11', title: 'Security Architecture',     href: '/docs/pages/security_architecture',      desc: 'TLS, OPC UA profiles, credential management' },
-  { num: '12', title: 'Deployment Architecture',   href: '/docs/pages/deployment_architecture',    desc: 'Docker, Compose, Kubernetes reference' },
-  { num: '13', title: 'Web UI Architecture',       href: '/docs/pages/web_architecture',           desc: 'React SPA & REST API endpoints' },
-  { num: '14', title: 'Testing Strategy',          href: '/docs/pages/testing_strategy',           desc: 'Test pyramid & simulator infrastructure' },
-  { num: '15', title: 'Standards Compliance',      href: '/docs/pages/standards_compliance',       desc: 'IEC 61158, IEC 62541, UNS, Sparkplug B' },
-  { num: '16', title: 'Appendices',                href: '/docs/pages/appendices',                 desc: 'Config reference, error codes, dependencies' },
-  { num: '17', title: 'Edge Cases & Gotchas',      href: '/docs/pages/edge_cases',                 desc: 'Operational notes & hot-reload scope' },
-  { num: '18', title: 'Device Configuration',      href: '/docs/pages/device_configuration',       desc: 'YAML examples & validation rules' },
-  { num: '19', title: 'Conclusion',                href: '/docs/pages/conclusion',                 desc: 'Summary of architectural achievements' },
+const SECTIONS = [
+  { num: '01', title: 'Platform Overview',        href: '/docs',                                                  desc: 'Architecture, services & getting started' },
+  { num: '02', title: 'Infrastructure',           href: '/docs/infrastructure',                                   desc: 'Docker, K8s, Nginx, TLS, databases, observability' },
+  { num: '03', title: 'Platform Guides',          href: '/docs/platform/GETTING_STARTED',                         desc: 'Getting started, API reference, MQTT contracts' },
+  { num: '04', title: 'Protocol Gateway',         href: '/docs/services/protocol-gateway',                        desc: 'Industrial protocol adapters, connection pools, breakers' },
+  { num: '05', title: 'Gateway Core',             href: '/docs/services/gateway-core',                            desc: 'API gateway, WebSocket bridge, middleware, proxy' },
+  { num: '06', title: 'Data Ingestion',           href: '/docs/services/data-ingestion',                          desc: 'MQTT subscriber, TimescaleDB writer, pipeline' },
+  { num: '07', title: 'Web UI',                   href: '/docs/services/web-ui',                                  desc: 'React SPA, state management, real-time dashboards' },
+  { num: '08', title: 'Security Overview',        href: '/docs/platform/SECURITY_OVERVIEW',                       desc: 'OIDC, TLS, credential management, hardening' },
+  { num: '09', title: 'Operations Runbook',       href: '/docs/platform/OPERATIONS_RUNBOOK',                      desc: 'Deployment, scaling, backup & recovery' },
 ];
 
 // ─── Small Components ─────────────────────────────────────────────────────────
@@ -117,35 +107,34 @@ export default function Home() {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title="Protocol Gateway"
-      description="Industrial-grade data acquisition — Modbus · OPC UA · Siemens S7 → MQTT"
+      title="Conduit Edge"
+      description="Industrial IoT platform — Protocol Gateway · Data Ingestion · Gateway Core · Web UI"
     >
       {/* ═══════════════ HERO ═══════════════ */}
       <section className={styles.hero}>
         <div className={styles.heroInner}>
           <div className={styles.heroPills}>
-            <span className={styles.pill}>Go 1.22+</span>
-            <span className={styles.pill}>v2.3.0</span>
-            <span className={styles.pill}>~25 MB</span>
-            <span className={clsx(styles.pill, styles.pillTeal)}>February 2026</span>
+            <span className={styles.pill}>Go · Node.js · React</span>
+            <span className={styles.pill}>Docker & K8s</span>
+            <span className={styles.pill}>MQTT / UNS</span>
+            <span className={clsx(styles.pill, styles.pillTeal)}>April 2026</span>
           </div>
 
           <Heading as="h1" className={styles.heroTitle}>
-            Protocol <span className={styles.heroAccent}>Gateway</span>
+            Conduit <span className={styles.heroAccent}>Edge</span>
           </Heading>
 
           <p className={styles.heroSubtitle}>
-            Industrial-grade data acquisition bridging heterogeneous automation devices
-            to modern IT infrastructure via MQTT — following the{' '}
+            A complete Industrial IoT platform bridging shop-floor devices to modern
+            IT infrastructure — from protocol acquisition to real-time dashboards,
+            built on the{' '}
             <strong>Unified Namespace</strong> pattern.
           </p>
 
           <div className={styles.heroProtocols}>
-            {['Modbus TCP', 'Modbus RTU', 'OPC UA', 'Siemens S7'].map((p) => (
+            {['Protocol Gateway', 'Data Ingestion', 'Gateway Core', 'Web UI'].map((p) => (
               <span key={p} className={styles.proto}>{p}</span>
             ))}
-            <span className={styles.protoArrow}>→</span>
-            <span className={clsx(styles.proto, styles.protoMqtt)}>MQTT</span>
           </div>
 
           <div className={styles.heroCta}>
@@ -157,9 +146,9 @@ export default function Home() {
             </Link>
             <Link
               className={clsx('button button--lg', styles.ctaOutline)}
-              to="/docs/pages/summary"
+              to="/docs/platform/GETTING_STARTED"
             >
-              Executive Summary →
+              Getting Started →
             </Link>
           </div>
         </div>
@@ -175,9 +164,9 @@ export default function Home() {
       {/* ═══════════════ ARCHITECTURE FLOW ═══════════════ */}
       <section className={styles.archSection}>
         <div className={styles.sectionWrap}>
-          <h2 className={styles.sectionTitle}>System Architecture</h2>
+          <h2 className={styles.sectionTitle}>Platform Architecture</h2>
           <p className={styles.sectionSub}>
-            Hexagonal core, per-protocol adapter pools, and a unified MQTT publishing layer.
+            From industrial devices through protocol acquisition to real-time dashboards and time-series storage.
           </p>
 
           <div className={styles.archFlow}>
@@ -190,14 +179,14 @@ export default function Home() {
 
             <div className={clsx(styles.archNode, styles.archNodeCore)}>
               <span className={styles.archIcon}>⚙️</span>
-              <strong>Protocol Gateway</strong>
-              <span>Adapters · Pools · Breakers · Domain</span>
+              <strong>Conduit Edge</strong>
+              <span>Gateway · Ingestion · Core · UI</span>
             </div>
             <span className={styles.archArrow}>→</span>
 
             <div className={styles.archNode}>
               <span className={styles.archIcon}>📡</span>
-              <strong>MQTT Broker</strong>
+              <strong>EMQX Broker</strong>
               <span>UNS topic hierarchy</span>
             </div>
             <span className={styles.archArrow}>→</span>
@@ -205,15 +194,15 @@ export default function Home() {
             <div className={styles.archNode}>
               <span className={styles.archIcon}>🖥️</span>
               <strong>IT Infrastructure</strong>
-              <span>InfluxDB · SCADA · Analytics</span>
+              <span>TimescaleDB · Grafana · Analytics</span>
             </div>
           </div>
 
           <div className={styles.archMeta}>
-            <span className={styles.archMetaItem}>🔌 &nbsp;Per-device connection pools</span>
-            <span className={styles.archMetaItem}>🛡️ &nbsp;3-tier circuit breakers</span>
-            <span className={styles.archMetaItem}>📦 &nbsp;10 000-slot MQTT buffer</span>
-            <span className={styles.archMetaItem}>📊 &nbsp;Prometheus + zerolog</span>
+            <span className={styles.archMetaItem}>🔌 &nbsp;6 industrial protocols</span>
+            <span className={styles.archMetaItem}>🛡️ &nbsp;OIDC + TLS security</span>
+            <span className={styles.archMetaItem}>📦 &nbsp;Docker & Kubernetes</span>
+            <span className={styles.archMetaItem}>📊 &nbsp;Prometheus + Grafana</span>
           </div>
         </div>
       </section>
@@ -228,15 +217,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════ CHAPTERS ═══════════════ */}
+      {/* ═══════════════ DOCUMENTATION ═══════════════ */}
       <section className={styles.section}>
         <div className={styles.sectionWrap}>
           <h2 className={styles.sectionTitle}>Documentation</h2>
           <p className={styles.sectionSub}>
-            19 chapters covering every architectural layer and operational concern
+            Every service, infrastructure component, and platform-level concern
           </p>
           <div className={styles.chaptersGrid}>
-            {CHAPTERS.map((c) => <ChapterCard key={c.num} {...c} />)}
+            {SECTIONS.map((c) => <ChapterCard key={c.num} {...c} />)}
           </div>
         </div>
       </section>
@@ -248,12 +237,12 @@ export default function Home() {
           <p className={styles.sectionSub}>Know what to look at for common tasks</p>
           <div className={styles.quickGrid}>
             {[
-              { task: 'Add a new protocol adapter',  ref: 'Ch. 3 — Interfaces',     link: '/docs/pages/architectural_principles' },
-              { task: 'Tune polling performance',     ref: 'Ch. 8 — Worker pool',    link: '/docs/pages/dataflow_architecture' },
-              { task: 'Debug connectivity issues',    ref: 'Ch. 9 — Circuit breakers', link: '/docs/pages/resilience_patterns' },
-              { task: 'Configure TLS / security',     ref: 'Ch. 11 — Security',      link: '/docs/pages/security_architecture' },
-              { task: 'Deploy to production',         ref: 'Ch. 12 — Deployment',    link: '/docs/pages/deployment_architecture' },
-              { task: 'Set up Prometheus monitoring', ref: 'Ch. 10 — Observability', link: '/docs/pages/observability_infrastructure' },
+              { task: 'Get the platform running',     ref: 'Getting Started',         link: '/docs/platform/GETTING_STARTED' },
+              { task: 'Understand the API',            ref: 'API Reference',           link: '/docs/platform/API_REFERENCE' },
+              { task: 'Configure infrastructure',      ref: 'Infrastructure',          link: '/docs/infrastructure' },
+              { task: 'Set up TLS & security',         ref: 'Security Overview',       link: '/docs/platform/SECURITY_OVERVIEW' },
+              { task: 'Deploy to production',          ref: 'Infrastructure — K8s',    link: '/docs/infrastructure/pages/kubernetes' },
+              { task: 'Set up monitoring',             ref: 'Observability Stack',     link: '/docs/infrastructure/pages/observability_stack' },
             ].map(({ task, ref, link }) => (
               <Link key={task} to={link} className={styles.quickCard}>
                 <span className={styles.quickTask}>{task}</span>
