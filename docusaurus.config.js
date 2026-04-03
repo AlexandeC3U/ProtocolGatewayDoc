@@ -11,10 +11,10 @@ const config = {
     v4: true,
   },
 
-  url: 'https://AlexanderC3U.github.io',
+  url: 'https://AlexandeC3U.github.io',
   baseUrl: '/ProtocolGatewayDoc/',
 
-  organizationName: 'AlexanderC3U',
+  organizationName: 'AlexandeC3U',
   projectName: 'ProtocolGatewayDoc',
   trailingSlash: false,
 
